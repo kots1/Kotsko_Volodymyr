@@ -1,7 +1,7 @@
-package com.epam.homework.delivery.service.repository.impl;
+package com.epam.homework.delivery.repository.impl;
 
 import com.epam.homework.delivery.model.Order;
-import com.epam.homework.delivery.service.repository.OrderRepository;
+import com.epam.homework.delivery.repository.OrderRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

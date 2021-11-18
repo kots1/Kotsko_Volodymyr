@@ -2,7 +2,7 @@ package com.epam.homework.delivery.service.impl;
 
 import com.epam.homework.delivery.model.Tariff;
 import com.epam.homework.delivery.service.TariffService;
-import com.epam.homework.delivery.service.repository.TariffRepository;
+import com.epam.homework.delivery.repository.TariffRepository;
 import com.epam.homework.delivery.сontroller.dto.TariffDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

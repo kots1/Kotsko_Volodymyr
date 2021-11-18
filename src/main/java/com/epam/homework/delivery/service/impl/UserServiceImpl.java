@@ -3,7 +3,7 @@ package com.epam.homework.delivery.service.impl;
 
 import com.epam.homework.delivery.model.User;
 import com.epam.homework.delivery.service.UserService;
-import com.epam.homework.delivery.service.repository.UserRepository;
+import com.epam.homework.delivery.repository.UserRepository;
 import com.epam.homework.delivery.сontroller.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

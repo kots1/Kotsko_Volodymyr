@@ -2,7 +2,7 @@ package com.epam.homework.delivery.service.impl;
 
 import com.epam.homework.delivery.model.Direction;
 import com.epam.homework.delivery.service.DirectionService;
-import com.epam.homework.delivery.service.repository.DirectionRepository;
+import com.epam.homework.delivery.repository.DirectionRepository;
 import com.epam.homework.delivery.сontroller.dto.DirectionDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

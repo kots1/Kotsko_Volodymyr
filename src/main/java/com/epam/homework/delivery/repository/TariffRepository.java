@@ -1,4 +1,4 @@
-package com.epam.homework.delivery.service.repository;
+package com.epam.homework.delivery.repository;
 
 import com.epam.homework.delivery.model.Tariff;
 

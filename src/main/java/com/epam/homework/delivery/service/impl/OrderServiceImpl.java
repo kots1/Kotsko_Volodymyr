@@ -7,7 +7,7 @@ import com.epam.homework.delivery.service.DirectionService;
 import com.epam.homework.delivery.service.OrderService;
 import com.epam.homework.delivery.service.TariffService;
 import com.epam.homework.delivery.service.UserService;
-import com.epam.homework.delivery.service.repository.OrderRepository;
+import com.epam.homework.delivery.repository.OrderRepository;
 import com.epam.homework.delivery.сontroller.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

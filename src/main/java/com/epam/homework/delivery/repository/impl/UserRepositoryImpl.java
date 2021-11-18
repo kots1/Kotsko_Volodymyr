@@ -1,7 +1,7 @@
-package com.epam.homework.delivery.service.repository.impl;
+package com.epam.homework.delivery.repository.impl;
 
 import com.epam.homework.delivery.model.User;
-import com.epam.homework.delivery.service.repository.UserRepository;
+import com.epam.homework.delivery.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

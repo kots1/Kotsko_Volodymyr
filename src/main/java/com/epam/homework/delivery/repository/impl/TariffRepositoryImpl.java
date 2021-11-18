@@ -1,7 +1,7 @@
-package com.epam.homework.delivery.service.repository.impl;
+package com.epam.homework.delivery.repository.impl;
 
 import com.epam.homework.delivery.model.Tariff;
-import com.epam.homework.delivery.service.repository.TariffRepository;
+import com.epam.homework.delivery.repository.TariffRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
