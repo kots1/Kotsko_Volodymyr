@@ -1,7 +1,7 @@
 package com.epam.homework.delivery.service;
 
 import com.epam.homework.delivery.model.User;
-import com.epam.homework.delivery.сontroller.dto.UserDto;
+import com.epam.homework.delivery.dto.UserDto;
 
 import java.util.List;
 

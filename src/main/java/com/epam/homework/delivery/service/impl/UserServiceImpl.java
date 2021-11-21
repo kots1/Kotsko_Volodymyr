@@ -1,10 +1,11 @@
 package com.epam.homework.delivery.service.impl;
 
 
+import com.epam.homework.delivery.mapper.UserMapper;
 import com.epam.homework.delivery.model.User;
 import com.epam.homework.delivery.service.UserService;
 import com.epam.homework.delivery.repository.UserRepository;
-import com.epam.homework.delivery.сontroller.dto.UserDto;
+import com.epam.homework.delivery.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,14 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .getAllUsers()
                 .stream()
-                .map(this::mapUserToUserDto)
+                .map(UserMapper.INSTANCE::userToUserDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserDto getUserByID(int id) {
         log.info("UserServiceImpl getUserByID id = " + id);
-        return mapUserToUserDto(userRepository.getUserByID(id));
+        return UserMapper.INSTANCE.userToUserDto(userRepository.getUserByID(id));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(User user) {
         log.info("UserServiceImpl createUser ");
-        return mapUserToUserDto(userRepository.createUser(user));
+        return UserMapper.INSTANCE.userToUserDto(userRepository.createUser(user));
     }
 
     @Override
@@ -55,26 +56,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(int id, User user) {
         log.info("UserServiceImpl updateUser id = " + id);
-        return mapUserToUserDto(userRepository.updateUser(id, user));
+        return UserMapper.INSTANCE.userToUserDto(userRepository.updateUser(id, user));
     }
 
-    private UserDto mapUserToUserDto(User user) {
-        return UserDto.builder()
-                .login(user.getLogin())
-                .name(user.getName())
-                .phone(user.getPhone())
-                .secondName(user.getSecondName())
-                .email(user.getEmail())
-                .build();
-    }
 
-    private User mapUserDtoToUser(UserDto userDto) {
-        return User.builder()
-                .login(userDto.getLogin())
-                .name(userDto.getName())
-                .phone(userDto.getPhone())
-                .secondName(userDto.getSecondName())
-                .email(userDto.getEmail())
-                .build();
-    }
 }

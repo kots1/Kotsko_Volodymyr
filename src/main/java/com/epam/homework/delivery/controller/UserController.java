@@ -1,15 +1,17 @@
-package com.epam.homework.delivery.сontroller;
+package com.epam.homework.delivery.controller;
 
 import com.epam.homework.delivery.model.User;
 import com.epam.homework.delivery.service.UserService;
-import com.epam.homework.delivery.сontroller.dto.UserDto;
+import com.epam.homework.delivery.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class UserController {
     final UserService userService;
@@ -22,7 +24,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/user")
-    public UserDto createUser(@RequestBody User user) {
+    public UserDto createUser(@RequestBody @Valid User user) {
         return userService.createUser(user);
     }
 
