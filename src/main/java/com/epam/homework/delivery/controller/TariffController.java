@@ -1,14 +1,16 @@
-package com.epam.homework.delivery.сontroller;
+package com.epam.homework.delivery.controller;
 
 import com.epam.homework.delivery.service.TariffService;
-import com.epam.homework.delivery.сontroller.dto.TariffDto;
+import com.epam.homework.delivery.dto.TariffDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class TariffController {
     final TariffService tariffService;
@@ -21,7 +23,7 @@ public class TariffController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/tariff")
-    public TariffDto createTariff(@RequestBody TariffDto tariffDto) {
+    public TariffDto createTariff(@RequestBody @Valid TariffDto tariffDto) {
         return tariffService.createTariff(tariffDto);
     }
 

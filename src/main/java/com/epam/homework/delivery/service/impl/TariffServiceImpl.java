@@ -1,9 +1,10 @@
 package com.epam.homework.delivery.service.impl;
 
+import com.epam.homework.delivery.mapper.TariffMapper;
 import com.epam.homework.delivery.model.Tariff;
 import com.epam.homework.delivery.service.TariffService;
 import com.epam.homework.delivery.repository.TariffRepository;
-import com.epam.homework.delivery.сontroller.dto.TariffDto;
+import com.epam.homework.delivery.dto.TariffDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,14 @@ public class TariffServiceImpl implements TariffService {
         return tariffRepository
                 .getAllTariff()
                 .stream()
-                .map(this::mapTariffToTariffDto)
+                .map(TariffMapper.INSTANCE::tariffToTariffDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public TariffDto getTariffByID(int id) {
         log.info("TariffServiceImpl getTariffByID id=" + id);
-        return mapTariffToTariffDto(tariffRepository.getTariffByName(id));
+        return TariffMapper.INSTANCE.tariffToTariffDto(tariffRepository.getTariffByName(id));
     }
 
     @Override
@@ -43,8 +44,8 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public TariffDto createTariff(TariffDto tariffDto) {
         log.info("TariffServiceImpl createTariff ");
-        Tariff tariff = mapTariffDtoToTariff(tariffDto);
-        return mapTariffToTariffDto(tariffRepository.createTariff(tariff));
+        Tariff tariff = TariffMapper.INSTANCE.tariffToTariffDto(tariffDto);
+        return TariffMapper.INSTANCE.tariffToTariffDto(tariffRepository.createTariff(tariff));
     }
 
     @Override
@@ -54,29 +55,4 @@ public class TariffServiceImpl implements TariffService {
 
     }
 
-    private TariffDto mapTariffToTariffDto(Tariff tariff) {
-        return TariffDto
-                .builder()
-                .maxVolume(tariff.getMaxVolume())
-                .maxWeight(tariff.getMaxWeight())
-                .name(tariff.getName())
-                .pricePerKg(tariff.getPricePerKg())
-                .pricePerKm(tariff.getPricePerKm())
-                .pricePerM3(tariff.getPricePerM3())
-                .timePer100km(tariff.getTimePer100km())
-                .build();
-    }
-
-    private Tariff mapTariffDtoToTariff(TariffDto tariffDto) {
-        return Tariff
-                .builder()
-                .maxVolume(tariffDto.getMaxVolume())
-                .maxWeight(tariffDto.getMaxWeight())
-                .name(tariffDto.getName())
-                .pricePerKg(tariffDto.getPricePerKg())
-                .pricePerKm(tariffDto.getPricePerKm())
-                .pricePerM3(tariffDto.getPricePerM3())
-                .timePer100km(tariffDto.getTimePer100km())
-                .build();
-    }
 }

@@ -1,5 +1,6 @@
 package com.epam.homework.delivery.repository.impl;
 
+import com.epam.homework.delivery.exception.EntityNotFoundException;
 import com.epam.homework.delivery.model.Tariff;
 import com.epam.homework.delivery.repository.TariffRepository;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class TariffRepositoryImpl implements TariffRepository {
         return tariffs.stream()
                 .filter(e -> e.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Direction is not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Direction is not found!"));
     }
 
     @Override
@@ -30,7 +31,7 @@ public class TariffRepositoryImpl implements TariffRepository {
         return tariffs.stream()
                 .filter(e -> e.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Direction is not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Direction is not found!"));
     }
 
     @Override
