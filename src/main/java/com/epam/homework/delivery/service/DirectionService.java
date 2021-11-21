@@ -1,20 +1,19 @@
 package com.epam.homework.delivery.service;
 
 import com.epam.homework.delivery.model.Direction;
-import com.epam.homework.delivery.model.User;
-import com.epam.homework.delivery.сontroller.dto.DirectionDto;
+import com.epam.homework.delivery.dto.DirectionDto;
 
 import java.util.List;
 
-public interface DirectionService {
-    List<DirectionDto> getAllDirection();
+public abstract class DirectionService {
+   public abstract List<DirectionDto> getAllDirection();
 
-    DirectionDto getDirectionByID(int id);
+    public abstract DirectionDto getDirectionByID(int id);
 
-    Direction getDirectionByStartAndFinalCity(String startCity, String finalCity);
+    public abstract  Direction getDirectionByStartAndFinalCity(String startCity, String finalCity);
 
-    DirectionDto createDirection(DirectionDto direction);
+    public abstract  DirectionDto createDirection(DirectionDto direction);
 
-    void deleteDirection(int id);
+    public abstract void deleteDirection(int id);
 
 }

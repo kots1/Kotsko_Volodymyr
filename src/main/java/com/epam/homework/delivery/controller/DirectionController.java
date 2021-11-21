@@ -1,14 +1,16 @@
-package com.epam.homework.delivery.сontroller;
+package com.epam.homework.delivery.controller;
 
+import com.epam.homework.delivery.dto.DirectionDto;
 import com.epam.homework.delivery.service.DirectionService;
-import com.epam.homework.delivery.сontroller.dto.DirectionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class DirectionController {
     final DirectionService directionService;
@@ -21,7 +23,7 @@ public class DirectionController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/direction")
-    public DirectionDto createDirection(@RequestBody DirectionDto directionDto) {
+    public DirectionDto createDirection(@RequestBody @Valid DirectionDto directionDto) {
         return directionService.createDirection(directionDto);
     }
 

@@ -1,5 +1,6 @@
 package com.epam.homework.delivery.repository.impl;
 
+import com.epam.homework.delivery.exception.EntityNotFoundException;
 import com.epam.homework.delivery.model.Direction;
 import com.epam.homework.delivery.repository.DirectionRepository;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class DirectionRepositoryImpl implements DirectionRepository {
         return directions.stream()
                 .filter(e -> e.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Direction is not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Direction is not found!"));
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DirectionRepositoryImpl implements DirectionRepository {
         return directions.stream()
                 .filter(e -> e.getStartCity().equals(startCity) && e.getFinalCity().equals(finalCity))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Direction is not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Direction is not found!"));
     }
 
     @Override

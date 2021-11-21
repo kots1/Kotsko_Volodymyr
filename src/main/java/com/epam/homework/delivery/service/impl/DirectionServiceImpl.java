@@ -1,9 +1,10 @@
 package com.epam.homework.delivery.service.impl;
 
+import com.epam.homework.delivery.mapper.DirectionMapper;
 import com.epam.homework.delivery.model.Direction;
 import com.epam.homework.delivery.service.DirectionService;
 import com.epam.homework.delivery.repository.DirectionRepository;
-import com.epam.homework.delivery.сontroller.dto.DirectionDto;
+import com.epam.homework.delivery.dto.DirectionDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DirectionServiceImpl implements DirectionService {
+public class DirectionServiceImpl extends DirectionService {
     private final DirectionRepository directionRepository;
 
     @Override
@@ -22,14 +23,14 @@ public class DirectionServiceImpl implements DirectionService {
         log.info("DirectionServiceImpl getAllDirection");
         return directionRepository.getAllDirection()
                 .stream()
-                .map(this::mapDirectionToDirectionDto)
+                .map(DirectionMapper.INSTANCE::directionToDirectionDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public DirectionDto getDirectionByID(int id) {
         log.info("DirectionServiceImpl getDirectionByID id=" + id);
-        return mapDirectionToDirectionDto(directionRepository.getDirectionByID(id));
+        return DirectionMapper.INSTANCE.directionToDirectionDto(directionRepository.getDirectionByID(id));
     }
 
     @Override
@@ -41,8 +42,8 @@ public class DirectionServiceImpl implements DirectionService {
     @Override
     public DirectionDto createDirection(DirectionDto directionDto) {
         log.info("DirectionServiceImpl createDirection");
-        Direction direction = mapDirectionDtoToDirection(directionDto);
-        return mapDirectionToDirectionDto(directionRepository.createDirection(direction));
+        Direction direction = DirectionMapper.INSTANCE.directionToDirectionDto(directionDto);
+        return DirectionMapper.INSTANCE.directionToDirectionDto(directionRepository.createDirection(direction));
     }
 
     @Override
@@ -51,20 +52,4 @@ public class DirectionServiceImpl implements DirectionService {
         directionRepository.deleteDirection(id);
     }
 
-    private DirectionDto mapDirectionToDirectionDto(Direction direction) {
-        return DirectionDto
-                .builder().distance(direction.getDistance())
-                .finalCity(direction.getFinalCity())
-                .startCity(direction.getStartCity())
-                .build();
-    }
-
-    private Direction mapDirectionDtoToDirection(DirectionDto directionDto) {
-        return Direction
-                .builder()
-                .distance(directionDto.getDistance())
-                .finalCity(directionDto.getFinalCity())
-                .startCity(directionDto.getStartCity())
-                .build();
-    }
 }
