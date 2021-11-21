@@ -1,14 +1,16 @@
-package com.epam.homework.delivery.сontroller;
+package com.epam.homework.delivery.controller;
 
 import com.epam.homework.delivery.service.OrderService;
-import com.epam.homework.delivery.сontroller.dto.OrderDto;
+import com.epam.homework.delivery.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
@@ -21,7 +23,7 @@ public class OrderController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/order")
-    public OrderDto createTariff(@RequestBody OrderDto orderDto) {
+    public OrderDto createTariff(@RequestBody @Valid OrderDto orderDto) {
         return orderService.createOrder(orderDto);
     }
 

@@ -1,7 +1,6 @@
 package com.epam.homework.delivery.service;
 
-import com.epam.homework.delivery.model.Order;
-import com.epam.homework.delivery.сontroller.dto.OrderDto;
+import com.epam.homework.delivery.dto.OrderDto;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package com.epam.homework.delivery.repository.impl;
 
+import com.epam.homework.delivery.exception.EntityNotFoundException;
 import com.epam.homework.delivery.model.Order;
 import com.epam.homework.delivery.repository.OrderRepository;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         return orders.stream()
                 .filter(e -> e.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Direction is not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Direction is not found!"));
     }
 
     @Override
@@ -60,7 +61,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         if (isDeleted) {
             orders.add(order);
         } else {
-            throw new RuntimeException("User is not found!");
+            throw new EntityNotFoundException("Order is not found!");
         }
         return order;
     }
