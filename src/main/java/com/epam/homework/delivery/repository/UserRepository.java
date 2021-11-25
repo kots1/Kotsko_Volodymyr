@@ -1,19 +1,19 @@
 package com.epam.homework.delivery.repository;
 
 import com.epam.homework.delivery.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository {
-    List<User> getAllUsers();
+public interface UserRepository extends JpaRepository<User,Long> {
 
-    User getUserByID(int id);
 
-    User getUserByLogin(String name);
+    User findById(int id);
 
-    User createUser(User user);
+    User findByLogin(String name);
 
-    void deleteUser(int id);
+    User save(User user);
 
-    User updateUser(int id, User user);
+    void deleteById(Long id);
+
 }

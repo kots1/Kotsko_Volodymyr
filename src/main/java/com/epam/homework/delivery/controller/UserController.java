@@ -34,11 +34,11 @@ public class UserController {
         return userService.getUserByID(id);
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/user/{id}")
-    public UserDto updateUser(@PathVariable int id, @RequestBody User user) {
-        return userService.updateUser(id, user);
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @PutMapping("/user/{id}")
+//    public UserDto updateUser(@PathVariable int id, @RequestBody User user) {
+//        return userService.updateUser(id, user);
+//    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/user/{id}")

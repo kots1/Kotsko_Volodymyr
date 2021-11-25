@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsers() {
         log.info("UserServiceImpl getAllUsers");
+        List<User> list = new ArrayList<>(userRepository
+                .findAll());
         return userRepository
-                .getAllUsers()
+                .findAll()
                 .stream()
                 .map(UserMapper.INSTANCE::userToUserDto)
                 .collect(Collectors.toList());
@@ -32,32 +35,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByID(int id) {
         log.info("UserServiceImpl getUserByID id = " + id);
-        return UserMapper.INSTANCE.userToUserDto(userRepository.getUserByID(id));
+        return UserMapper.INSTANCE.userToUserDto(userRepository.findById(id));
     }
 
     @Override
     public User getUserByLogin(String login) {
         log.info("UserServiceImpl getUserByLogin login = " + login);
-        return userRepository.getUserByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
     @Override
     public UserDto createUser(User user) {
         log.info("UserServiceImpl createUser ");
-        return UserMapper.INSTANCE.userToUserDto(userRepository.createUser(user));
+        return UserMapper.INSTANCE.userToUserDto(userRepository.save(user));
     }
 
     @Override
     public void deleteUser(int id) {
         log.info("UserServiceImpl deleteUser id = " + id);
-        userRepository.deleteUser(id);
+        userRepository.deleteById((long) id);
     }
 
-    @Override
-    public UserDto updateUser(int id, User user) {
+    /*public UserDto updateUser(int id, User user) {
         log.info("UserServiceImpl updateUser id = " + id);
         return UserMapper.INSTANCE.userToUserDto(userRepository.updateUser(id, user));
-    }
+    }*/
 
 
 }
