@@ -3,6 +3,9 @@ package com.epam.homework.delivery.controller;
 import com.epam.homework.delivery.service.OrderService;
 import com.epam.homework.delivery.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +21,10 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/order")
     public List<OrderDto> getAllOrder() {
-        return orderService.getAllOrder();
+        Pageable sortedByName =
+                PageRequest.of(0, 3, Sort.by("price"));
+
+        return orderService.getAllOrder(sortedByName);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -50,12 +56,6 @@ public class OrderController {
     @GetMapping("/order/{id}")
     public OrderDto getOrderById(@PathVariable int id) {
         return orderService.getOrderByID(id);
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/order/{id}")
-    public OrderDto updateUser(@PathVariable int id, @RequestBody OrderDto orderDto) {
-        return orderService.updateOrder(id, orderDto);
     }
 
 

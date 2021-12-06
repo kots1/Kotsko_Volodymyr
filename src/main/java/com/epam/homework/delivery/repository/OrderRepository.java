@@ -1,23 +1,25 @@
 package com.epam.homework.delivery.repository;
 
 import com.epam.homework.delivery.model.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface OrderRepository {
-    List<Order> getAllOrder();
+public interface OrderRepository extends PagingAndSortingRepository<Order, Long> {
 
-    Order getOrderByID(int id);
+    @Query(value ="select * from orders u where u.user_id = ?1",nativeQuery = true)
+    List<Order> findAllByUserId(Long userId);
+    List<Order> findAll();
+    Page<Order> findAll(Pageable pageable);
 
-    List<Order> getOrderByUserId(int userId);
 
-    List<Order> getOrderByDirectionId(int directionId);
+    @Query(value ="select o from Order o where o.direction.id = ?1")
+    List<Order> findAllByDirectionId(Long directionId);
 
-    List<Order> getOrderByTariffId(int tariffId);
+    @Query(value ="select o from Order o where o.tariff.id = ?1")
+    List<Order> findAllByTariffId(Long tariffId);
 
-    Order createOrder(Order order);
-
-    Order updateOrder(int id, Order order);
-
-    void deleteOrder(int id);
 }

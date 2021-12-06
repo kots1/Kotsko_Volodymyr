@@ -26,4 +26,6 @@ public class OrderDto {
     private double weight;
     @NotBlank
     private String orderStatus;
+    @NotBlank
+    private String description;
 }
