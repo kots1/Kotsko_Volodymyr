@@ -1,5 +1,6 @@
 package com.epam.homework.delivery.service.impl;
 
+import com.epam.homework.delivery.exception.EntityNotFoundException;
 import com.epam.homework.delivery.mapper.TariffMapper;
 import com.epam.homework.delivery.model.Tariff;
 import com.epam.homework.delivery.service.TariffService;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -22,7 +24,7 @@ public class TariffServiceImpl implements TariffService {
     public List<TariffDto> getAllTariff() {
         log.info("TariffServiceImpl getAllTariff ");
         return tariffRepository
-                .getAllTariff()
+                .findAll()
                 .stream()
                 .map(TariffMapper.INSTANCE::tariffToTariffDto)
                 .collect(Collectors.toList());
@@ -31,13 +33,17 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public TariffDto getTariffByID(int id) {
         log.info("TariffServiceImpl getTariffByID id=" + id);
-        return TariffMapper.INSTANCE.tariffToTariffDto(tariffRepository.getTariffByName(id));
+        Optional<Tariff> tariff = tariffRepository.findById((long) id);
+        if (!tariff.isPresent()){
+            throw new EntityNotFoundException("getUserByID");
+        }
+        return TariffMapper.INSTANCE.tariffToTariffDto(tariff.get());
     }
 
     @Override
     public Tariff getTariffByName(String name) {
         log.info("TariffServiceImpl getTariffByName name=" + name);
-        return tariffRepository.getTariffByName(name);
+        return tariffRepository.findByName(name);
 
     }
 
@@ -45,13 +51,13 @@ public class TariffServiceImpl implements TariffService {
     public TariffDto createTariff(TariffDto tariffDto) {
         log.info("TariffServiceImpl createTariff ");
         Tariff tariff = TariffMapper.INSTANCE.tariffToTariffDto(tariffDto);
-        return TariffMapper.INSTANCE.tariffToTariffDto(tariffRepository.createTariff(tariff));
+        return TariffMapper.INSTANCE.tariffToTariffDto(tariffRepository.save(tariff));
     }
 
     @Override
     public void deleteTariff(int id) {
         log.info("TariffServiceImpl deleteTariff id=" + id);
-        tariffRepository.deleteTariff(id);
+        tariffRepository.deleteById((long) id);
 
     }
 

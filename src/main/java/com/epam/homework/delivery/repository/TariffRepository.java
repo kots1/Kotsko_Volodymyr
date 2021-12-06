@@ -1,18 +1,11 @@
 package com.epam.homework.delivery.repository;
 
 import com.epam.homework.delivery.model.Tariff;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface TariffRepository extends JpaRepository<Tariff, Long> {
 
-public interface TariffRepository {
 
-    List<Tariff> getAllTariff();
+    Tariff findByName(String name);
 
-    Tariff getTariffByName(int id);
-
-    Tariff getTariffByName(String name);
-
-    Tariff createTariff(Tariff tariff);
-
-    void deleteTariff(int id);
 }

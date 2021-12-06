@@ -1,7 +1,7 @@
 package com.epam.homework.delivery.service;
 
-import com.epam.homework.delivery.model.Tariff;
 import com.epam.homework.delivery.dto.TariffDto;
+import com.epam.homework.delivery.model.Tariff;
 
 import java.util.List;
 
