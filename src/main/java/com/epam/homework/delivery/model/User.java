@@ -1,5 +1,6 @@
 package com.epam.homework.delivery.model;
 
+import java.util.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -14,15 +15,16 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @Getter
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
-    //public User(){}
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     @Id
     private Long id;
     @NotBlank
     private String login;
+    @NotBlank
+    private String password;
     @NotBlank
     @Column(name = "first_name")
     private String name;

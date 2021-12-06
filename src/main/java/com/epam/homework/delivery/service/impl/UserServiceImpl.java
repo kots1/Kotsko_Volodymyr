@@ -1,6 +1,7 @@
 package com.epam.homework.delivery.service.impl;
 
 
+import com.epam.homework.delivery.exception.EntityNotFoundException;
 import com.epam.homework.delivery.mapper.UserMapper;
 import com.epam.homework.delivery.model.User;
 import com.epam.homework.delivery.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,7 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByID(int id) {
         log.info("UserServiceImpl getUserByID id = " + id);
-        return UserMapper.INSTANCE.userToUserDto(userRepository.findById(id));
+        Optional<User> user = userRepository.findById((long) id);
+        if (!user.isPresent()){
+            throw new EntityNotFoundException("getUserByID");
+        }
+        return UserMapper.INSTANCE.userToUserDto(user.get());
     }
 
     @Override
@@ -56,10 +62,6 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById((long) id);
     }
 
-    /*public UserDto updateUser(int id, User user) {
-        log.info("UserServiceImpl updateUser id = " + id);
-        return UserMapper.INSTANCE.userToUserDto(userRepository.updateUser(id, user));
-    }*/
 
 
 }
