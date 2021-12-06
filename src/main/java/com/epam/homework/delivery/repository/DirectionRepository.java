@@ -2,17 +2,13 @@ package com.epam.homework.delivery.repository;
 
 
 import com.epam.homework.delivery.model.Direction;
+import com.epam.homework.delivery.model.Tariff;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DirectionRepository {
-    List<Direction> getAllDirection();
+public interface DirectionRepository  extends JpaRepository<Direction,Long> {
 
-    Direction getDirectionByID(int id);
+    Direction getDirectionByStartCityAndFinalCity(String startCity,String finalCity);
 
-    Direction getDirectionByStartAndFinalCity(String startCity,String finalCity);
-
-    Direction createDirection(Direction direction);
-
-    void deleteDirection(int id);
 }
